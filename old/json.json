@@ -1,0 +1,185 @@
+ 
+  "properties": {
+    "type": "Airflow",
+    "typeProperties": {
+      "airflowProperties": {
+        "airflowConfigurationOverrides": {},
+        "airflowEnvironment": "FabricAirflowJob-1.0.0",
+        "airflowRequirements": [],
+        "airflowVersion": "2.10.5",
+        "enableAADIntegration": True,
+        "enableTriggerers": True,
+        "environmentVariables": {},
+        "packageProviderPath": "plugins",
+        "pythonVersion": "3.12",
+        "secrets": []
+      },
+      "computeProperties": {
+        "computePool": "CustomPool",
+        "computeSize": "Small",
+        "enableAutoscale": True,
+        "autoScaleMinNodes": 5,
+        "autoScaleMaxNodes": 6,
+        "enableAvailabilityZones": True,
+        "extraNodes": 0
+      }
+    }
+  }
+
+
+
+
+{
+    "id": "/subscriptions/f6fefa7e-3ef9-477c-846d-f8801ca482f6/resourceGroups/f6fefa7e-3ef9-477c-846d-f8801ca482f6/providers/Microsoft.Trident/workspaces/f6fefa7e-3ef9-477c-846d-f8801ca482f6/integrationruntimes/4493f8dc-dfa0-4f7f-a8af-924ca27b4aee",
+    "name": "4493f8dc-dfa0-4f7f-a8af-924ca27b4aee",
+    "type": "Microsoft.Trident/workspaces/integrationruntimes",
+    "properties": {
+        "type": "Airflow",
+        "lastModifiedByObjectId": "4ac54800-ec32-4245-9d90-75f7fa55488c",
+        "typeProperties": {
+            "airflowProperties": {
+                "airflowEnvironment": "FabricAirflowJob-1.0.0",
+                "airflowVersion": "2.10.5",
+                "pythonVersion": "3.12",
+                "environmentVariables": {
+                    "aa": "aa"
+                },
+                "airflowConfigurationOverrides": {},
+                "airflowWebUrl": "https://6f027214601747.westcentralus.airflow.svc.datafactory.azure.com/login/",
+                "airflowRequirements": [],
+                "packageProviderPath": "plugins",
+                "enableAADIntegration": true,
+                "enableTriggerers": false,
+                "secrets": [],
+                "encryptedSecrets": [],
+                "migratedToFabric": false
+            },
+            "computeProperties": {
+                "computePool": "StarterPool",
+                "computeSize": "Small",
+                "extraNodes": 0,
+                "enableAvailabilityZones": false,
+                "enableAutoscale": false,
+                "clusterIP": "20.83.3.45",
+                "location": "Central US"
+            }
+        },
+        "state": "Stopped"
+    },
+    "etag": "00004096-0000-0600-0000-682ed6cc0000"
+}
+
+
+==============================================================================================================================
+/COMPUTE
+==============================================================================================================================
+GET /compute
+{
+    "poolTemplate": {
+        "poolName": "compute",
+        "poolId": "GUID",
+        "computePool": "StarterPool",
+        "computeSize": "Small",
+        "extraNodes": 0,
+        "enableAvailabilityZones": false, 
+        "enableAutoscale": false,
+    }
+    "airflowWebUrl": "https://6f027214601747.westcentralus.airflow.svc.datafactory.azure.com/login/",
+    "clusterIP": "172.170.61.255",                                                                   
+    "location": "centralus"
+}
+
+POST /compute
+{
+    "poolTemplate": {
+        "poolId": "GUID",
+    }
+}
+==============================================================================================================================
+/POOLS
+==============================================================================================================================
+POST   pools      --> don't specify the id, this will be auto generated --> update one pool -> returns the id
+GET    pools      --> List all pool definitions, not just the list of ids
+DELETE pools/{id
+} --> 
+GET    pools/{id
+}
+
+
+Schema for GET / POOLS without a POOL ID 
+[
+    {
+        "id": "GUID""name": "cppLarge", --> user can specify the name (display only)
+        "default": false, --> Remove from the API schema - this is an internal thing we store in the IR
+        "computeSize": "Large",
+        "extraNodes": 0,     -----> extraWorkers
+         "enableAutoscale": false,
+        "autoScaleMinNodes": 3,   -----> minWorkers (the user cannot set less than 3)
+        "autoScaleMaxNodes": 8    -----> maxWorkers
+    },
+    {
+        "id": "GUID""name": "anotherCustomPool",
+        "default": true,       --> Remove from the API schema - this is an internal thing we store in the IR
+    "computeSize": "Large",
+        "extraNodes": 0,
+        "enableAutoscale": false,
+        "autoScaleMinNodes": 3,
+        "autoScaleMaxNodes": 8
+    }
+]
+
+==============================================================================================================================
+SKU
+==============================================================================================================================
+
+
+
+
+==============================================================================================================================
+Schema Updates
+==============================================================================================================================
+Add GUID to the pool
+Add GUID/Name to the IR poolTemplate
+How to remove the requirements from the IR - keep it in the storage / GIT SYNC
+    If the user is using managed blob they can update the requirements from the UI
+    Limitations
+        - If they are using GIT sync they need to update the requirements from the file (GIT)
+        - Validate would not work - we can provide a validate api
+
+Documention Update -- Get Apache Airflow Job Definition and SET
+    ApacheAirflowJobV1.json -> apacheairflowjob-content.json
+
+Ask Fabric team how to update the schema versioning
+
+
+
+
+{
+    "type": "[Start] GetMWCTokenV2",
+    "workspaceObjectId": "550a6115-fa2a-4eb1-82e9-4f56b9abd607",
+    "workloadType": "Dataflows",
+    "artifacts": [
+        {
+            "artifactType": "DataflowFabric",
+            "artifactObjectId": "e82dd584-5596-49a0-b7eb-6d6e52f1acc2"
+        }
+    ],
+    "asyncId": "58f6262d-8a6a-4939-87db-1f9b6d3e50f3",
+    "iframeId": "0e836d97-f55a-43c2-b3ec-0be5ea9743a2"
+}
+
+{
+    "type": "[Start] GetMWCToken",
+    "workspaceObjectId": "550a6115-fa2a-4eb1-82e9-4f56b9abd607",
+    "workloadType": "DI",
+    "asyncId": "9d6f5307-7706-48e1-a770-0b8cb8b2d650",
+    "iframeId": "3d6f6d83-7c59-4cae-81bf-4153f054df60"
+}
+
+
+
+{
+    "Token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjlERTlEQjkzQzI0M0NBNTg1RjI1RTI3RTU1RjVBOUNBMzk0RTREMDgiLCJ4NXQiOiJuZW5iazhKRHlsaGZKZUotVmZXcHlqbE9UUWciLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJtc2l0LnBiaWRlZGljYXRlZC53aW5kb3dzLm5ldCIsImV4cCI6MTc0Nzk3NTY2OSwibmJmIjoxNzQ3OTcxMTQxLCJvcmlnaW5hbEF1dGhvcml6YXRpb25IZWFkZXIiOiJCZWFyZXIgZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKU1V6STFOaUlzSW5nMWRDSTZJa05PZGpCUFNUTlNkM0ZzU0VaRlZtNWhiMDFCYzJoRFNESllSU0lzSW10cFpDSTZJa05PZGpCUFNUTlNkM0ZzU0VaRlZtNWhiMDFCYzJoRFNESllSU0o5LmV5SmhkV1FpT2lKb2RIUndjem92TDJGdVlXeDVjMmx6TG5kcGJtUnZkM011Ym1WMEwzQnZkMlZ5WW1rdllYQnBJaXdpYVhOeklqb2lhSFIwY0hNNkx5OXpkSE11ZDJsdVpHOTNjeTV1WlhRdk56Sm1PVGc0WW1ZdE9EWm1NUzAwTVdGbUxUa3hZV0l0TW1RM1kyUXdNVEZrWWpRM0x5SXNJbWxoZENJNk1UYzBOemszTVRFME1Td2libUptSWpveE56UTNPVGN4TVRReExDSmxlSEFpT2pFM05EYzVOelUyTmprc0ltRmpZM1FpT2pBc0ltRmpjaUk2SWpFaUxDSmhhVzhpT2lKQlkxRkJUeTg0V2tGQlFVRnRVVU5OV1ZsR2FXeDVRa0VyUkRWVWRGUjZWelp3VVROVk1ra3hUSGRCTWpkVWRVZHliazFRTTNOSGJXOVdUbFFyTlRaNFNuUnNOVEkwZVZjeFIzSTRjRTVzWW5KSmJURXJXVEZuVjJadFZuQlJlR1YzYWs4MlJIVkNORVpqUmtSbFZURlhkQ3Q1UnpscVRYQjBUREpTV1U4M2RXSmlZbXhQTDNKSmRGWXZWbWRSWVhBeE5TOUhVRTl5UzFNMk5Va3JVekE1VG5WS1JXSlhkVUZ1ZFhsaFIzQkVWbEo1TTNVNWFrTjFSRkpuYWpGdFJrdDVXVFJIUm5Cc2FtSXhjMWd2YzFGdFZsVlFNRU41VkdselFrOUdabmx4V1dobGFtNDRNVEEzYVROeU9FZEdWRVY1S3k5U2FFNHZhRmx0WWtSbVFrSnRVQzlVTTFKeVRFMDRRMWhPSWl3aVlXMXlJanBiSW5KellTSXNJbTFtWVNKZExDSmhjSEJwWkNJNklqQTBZakEzTnprMUxUaGtaR0l0TkRZeFlTMWlZbVZsTFRBeVpqbGxNV0ptTjJJME5pSXNJbUZ3Y0dsa1lXTnlJam9pTUNJc0ltTnZiblJ5YjJ4eklqcGJJbUZ3Y0Y5eVpYTWlYU3dpWTI5dWRISnZiSE5mWVhWa2N5STZXeUl3TURBd01EQXdPUzB3TURBd0xUQXdNREF0WXpBd01DMHdNREF3TURBd01EQXdNREFpTENJd01EQXdNREF3TXkwd01EQXdMVEJtWmpFdFkyVXdNQzB3TURBd01EQXdNREF3TURBaVhTd2laR1YyYVdObGFXUWlPaUk0TXpZMU1XTTBNeTB4WmpabExUUTFNVEV0T0RkaE1TMHlNMlJrWXpJek5EazVNeklpTENKbVlXMXBiSGxmYm1GdFpTSTZJa1p2Ym5SbGN5SXNJbWRwZG1WdVgyNWhiV1VpT2lKV2FXNXBZMmwxY3lJc0ltbGtkSGx3SWpvaWRYTmxjaUlzSW1sd1lXUmtjaUk2SWpjekxqUXlMakUzTmk0eU1EUWlMQ0p1WVcxbElqb2lWbWx1YVdOcGRYTWdSbTl1ZEdWeklpd2liMmxrSWpvaU5HRmpOVFE0TURBdFpXTXpNaTAwTWpRMUxUbGtPVEF0TnpWbU4yWmhOVFUwT0Roaklpd2liMjV3Y21WdFgzTnBaQ0k2SWxNdE1TMDFMVEl4TFRFME5qRXpNRFV0T0RFNE56Y3hOREF4TFRFME9URTBNakV4TURVdE1URXdNVEF6SWl3aWNIVnBaQ0k2SWpFd01ETXdNREF3T0RBd05rTXlNRFVpTENKeWFDSTZJakV1UVZKdlFYWTBhalZqZGtkSGNqQkhVbkY1TVRnd1FraGlVbmRyUVVGQlFVRkJRVUZCZDBGQlFVRkJRVUZCUVVGaFFVNW5ZVUZCTGlJc0luTmpjQ0k2SW5WelpYSmZhVzF3WlhKemIyNWhkR2x2YmlJc0luTnBaQ0k2SWpBd05HWTROemM1TFRCa1kyUXRNVGxqT0MxaU9UazJMV1UyWlRoaU1USmpNRGs1WlNJc0luTnBaMjVwYmw5emRHRjBaU0k2V3lKa2RtTmZiVzVuWkNJc0ltUjJZMTlqYlhBaUxDSnJiWE5wSWwwc0luTjFZaUk2SWpsNExYWmtZMVZqWVMxU01YUjRUR3hyUVVoSmRtVndkRGhzUVc5dFYwcHpZUzEyYWpkMVJrUk1Zbk1pTENKMGFXUWlPaUkzTW1ZNU9EaGlaaTA0Tm1ZeExUUXhZV1l0T1RGaFlpMHlaRGRqWkRBeE1XUmlORGNpTENKMWJtbHhkV1ZmYm1GdFpTSTZJblptYjI1MFpYTkFiV2xqY205emIyWjBMbU52YlNJc0luVndiaUk2SW5abWIyNTBaWE5BYldsamNtOXpiMlowTG1OdmJTSXNJblYwYVNJNkltaGtaazFHYVc0eE1qQkhkamRhVDIxU05XTjNRVUVpTENKMlpYSWlPaUl4TGpBaUxDSjNhV1J6SWpwYkltSTNPV1ppWmpSa0xUTmxaamt0TkRZNE9TMDRNVFF6TFRjMllqRTVOR1U0TlRVd09TSmRMQ0o0YlhOZlpuUmtJam9pU1hGbExVTmZhM1V6TkVSd1FUbHNSVlZ4T0VGUk1EaE5aSFZWT1V3elRUTm9OR3REUzJkQ1oyZFRaMEprV0U0eldsaE9NRTE1TVd0ak1qRjZJaXdpZUcxelgybGtjbVZzSWpvaU1qZ2dNU0o5LkJUei16S1cxWVFWUHN1RnpaclhrbEhhak5CZ1JkU3ZXRnlTdmRlempraklnLXJJcDZIajA2V0sxVXI3RnM0dlJmb0pOWHM5RHFMZmFBSmh1cTRSU0NfWmlyQzVTbldGdzAxUUJSZklZbEFjX19mSTNJaUhFNzJ6SUFsdUJydWJHQi1UMTR2UnppdnJqTVkwOG5qOFRQa2ZqM0xlN1ZZU25xNjFXWGZKbzFFNUUySHlCdnFuMHh2eDZFQzlzVWVHenpmaHRsVy1TNWRmWG1SZl9Udmg4NDJaV1VNLVJnZjZYZGlqcWZrRndsMjY0TXFjYlJ6T2Z3WDFGaXdYMVBqclNDaDVxUTl6QkZQS0RqMzA1bmFXS0Rsbl9wbG02aUVMUG04TzNpRXNBcGhrLVhBVE5BZ0xaMFEtektfNGdCZEdUcmJJT1VUMVBFV1B0eEc0RnlxTlVDZyIsInJvbGxvdXRGcWRuIjoibXNpdC5wYmlkZWRpY2F0ZWQud2luZG93cy5uZXQiLCJ2aXJ0dWFsU2VydmljZU9iamVjdElkIjoiOUYwOTFGREItMTA3Qy00QTc0LTlENDctRkIxOTNDM0JFMjBDIiwid29ya2xvYWRDbGFpbXMiOiJ7XHJcbiAgXCJ3b3JrbG9hZFR5cGVcIjogXCJESVwiLFxyXG4gIFwid29ya3NwYWNlT2JqZWN0SWRcIjogXCIzMDI5NjJjZi1mZjU0LTQ5ZDctOThkYi00NjEwNTRiNzIyMTZcIixcclxuICBcInRlbmFudElkXCI6IFwiNzJmOTg4YmYtODZmMS00MWFmLTkxYWItMmQ3Y2QwMTFkYjQ3XCIsXHJcbiAgXCJ1c2VyT2JqZWN0SWRcIjogXCI0YWM1NDgwMC1lYzMyLTQyNDUtOWQ5MC03NWY3ZmE1NTQ4OGNcIixcclxuICBcInVzZXJQcmluY2lwYWxOYW1lXCI6IFwidmZvbnRlc0BtaWNyb3NvZnQuY29tXCIsXHJcbiAgXCJhcnRpZmFjdHNcIjogW10sXHJcbiAgXCJ3b3Jrc3BhY2VQZXJtaXNzaW9uc1wiOiAxNVxyXG59IiwidG9rZW5UeXBlIjoiTXdjVG9rZW4iLCJ0aWQiOiIwMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDAiLCJ3b3Jrc3BhY2VJZCI6IjAwMDAwMDAwLTAwMDAtMDAwMC0wMDAwLTAwMDAwMDAwMDAwMCIsImN1c3RvbWVyQ2FwYWNpdHlPYmplY3RJZCI6IjEwMjA3OTQ5LTczRTYtNDg2Qy04NDNELTJBNjNCRUY3RjE1NyIsImlhdCI6MTc0Nzk3MTQ0Mn0.KqQ32ZRHo8rmHhZC0fjDuR442BgVHpIbEcpX6NTkBKVqHq_9XMZFjjvrBeT97f1U_32t8RgrwISCdenzdP6mfd-sGLHec6ToDiau3pAspnXlskK0GQyrGe9pVF6mfwAxQPeLfZftF-MAI-1vd-Acbpn_h0HB9-XShPYV6W-qXGyrvofgTGOSvLZl_IekEuaregG0On9RL2DeuhoeybtuBlx_nK7UscUiinRNCvt4L1htkwsoOtnSitWp3V9dby5P6mU-NjRq9uE590TX1kkwr0lv474l7tsnW_18rc1S8aqHP4ZyK6XPEWJPmYxiKvDttaIDbLv560W3W2mz9nxoPw",
+    "TargetUriHost": "1020794973e6486c843d2a63bef7f157.pbidedicated.windows.net",
+    "CapacityObjectId": "10207949-73E6-486C-843D-2A63BEF7F157"
+}

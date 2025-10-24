@@ -1,0 +1,8 @@
+msal<2,>=1.27
+azure-identity<2,>=1.17
+requests<3,>=2.31
+
+[test]
+pytest
+pytest-mock
+pytest-asyncio

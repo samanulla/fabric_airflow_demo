@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fabric-airflow-client"
+description = "Fabric Apache Airflow Sample APi Client"
+readme = "README.md"
+authors = [
+  { name="Vinicius Fontes", email="vfontes@microsot.com" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Development Status :: 3 - Alpha",
+    "Environment :: Plugins",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+version = "0.0.1"
+requires-python = ">=3.12"
+dependencies = [
+  "msal>=1.27,<2",
+  "azure-identity>=1.17,<2",
+  "requests>=2.31,<3"
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-mock",
+    "pytest-asyncio",
+]
+
+[project.urls]
+Homepage = "Not Available"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["fabric.airflow.client.*"]
+namespaces = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_functions = ["test_*"]
+addopts = "-v"
+asyncio_mode = "auto"

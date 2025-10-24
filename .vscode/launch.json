@@ -1,0 +1,42 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "pytest: Debug all",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["-s", "tests"],
+      "cwd": "${workspaceFolder}",
+      "envFile": "${workspaceFolder}/.env",
+      "justMyCode": true
+    },
+    {
+      "name": "pytest: Debug current file",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["-s", "${relativeFile}"],
+      "cwd": "${workspaceFolder}",
+      "envFile": "${workspaceFolder}/.env",
+      "justMyCode": true
+    },
+    {
+      "name": "pytest: Debug -k expression",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["-s", "-k", "${input:testExpr}", "tests"],
+      "cwd": "${workspaceFolder}",
+      "envFile": "${workspaceFolder}/.env",
+      "justMyCode": true
+    }
+  ],
+  "inputs": [
+    {
+      "id": "testExpr",
+      "type": "promptString",
+      "description": "pytest -k expression (e.g., test_my_func or MyClass and not slow)"
+    }
+  ]
+}
