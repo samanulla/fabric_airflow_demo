@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fabric-airflow-client"
-description = "Fabric Apache Airflow Sample APi Client"
+description = "Microsoft Fabric Apache Airflow API Client"
 readme = "README.md"
 authors = [
-  { name="Vinicius Fontes", email="vfontes@microsot.com" },
+  { name="Vinicius Fontes", email="vfontes@microsoft.com" },
 ]
 classifiers = [
     "Programming Language :: Python :: 3",

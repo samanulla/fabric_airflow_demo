@@ -1,17 +1,23 @@
+import os
 import unittest
 import time
 
-from fabric.airflow.client.airflow_files_api import AirflowFilesApiClient
-from fabric.airflow.client.share.api_exceptions import APIError
+from fabric.airflow.client.fabric_files_api_client import AirflowFilesApiClient
+from fabric.airflow.client.api_exceptions import APIError
+from fabric.airflow.client.config import Config
 
-from .config import ConfigClient
+# Initialize Config from environment variable CONFIG_FILE_PATH
+# Set environment variable: $env:CONFIG_FILE_PATH = "c:\src\ApiTest\config.ini"
+config_file = os.getenv('CONFIG_FILE_PATH')
+assert config_file is not None, "CONFIG_FILE_PATH environment variable must be set"
+config = Config.from_file(config_file, 'TEST')
 
 class TestFilesApiClientIntegration(unittest.TestCase):
     """Integration test cases for Files API client operations exposed by ConfigClient"""
 
     def setUp(self):
         """Set up test fixtures"""
-        self.files_client = ConfigClient.files_client()
+        self.files_client = config.files_client()
         self.test_text_content = "# Test DAG file\nfrom airflow import DAG\nprint('Hello World')"
         self.test_binary_content = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01'
         

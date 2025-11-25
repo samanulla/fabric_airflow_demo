@@ -1,14 +1,21 @@
+import os
 import unittest
 import uuid
-from tests.config import ConfigClient
-from fabric.airflow.client.airflow_control_plane_api import AirflowControlPlaneApiClient
-from fabric.airflow.client.airflow_control_plane_model import (
+
+from fabric.airflow.client.config import Config
+from fabric.airflow.client.fabric_control_plane_api_client import FabricControlPlaneApiClient
+from fabric.airflow.client.fabric_control_plane_model import (
     AirflowPoolTemplate,
     AirflowPoolsTemplate,
     AirflowWorkspaceSettings,
     WorkerScalability,
-    AirflowJobVersionDetails
 )
+
+# Initialize Config from environment variable CONFIG_FILE_PATH
+# Set environment variable: $env:CONFIG_FILE_PATH = "c:\src\ApiTest\config.ini"
+config_file = os.getenv('CONFIG_FILE_PATH')
+assert config_file is not None, "CONFIG_FILE_PATH environment variable must be set"
+config = Config.from_file(config_file, 'TEST')
 
 class TestAirflowControlPlaneApiIntegration(unittest.TestCase):
     """Integration tests for Airflow Control Plane API"""
@@ -16,8 +23,8 @@ class TestAirflowControlPlaneApiIntegration(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Set up test class with API client"""
-        cls.client: AirflowControlPlaneApiClient = ConfigClient.control_plane_client()
-        cls.workspace_id = ConfigClient.get_workspace_id()
+        cls.client: FabricControlPlaneApiClient = config.control_plane_client()
+        cls.workspace_id = config.workspace_id
 
     def _create_pool_template(self, pool_name: str, min_nodes: int, max_nodes: int) -> AirflowPoolTemplate:
         """Create a pool template with specified configuration"""

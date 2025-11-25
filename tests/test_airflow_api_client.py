@@ -1,20 +1,27 @@
+import os
 import unittest
 import json
 
-from fabric.airflow.client.share.api_exceptions import APIError
-from fabric.airflow.client.airflow_native_api import AirflowNativeApiClient
-from tests.config import ConfigClient
+from fabric.airflow.client.api_exceptions import APIError
+from fabric.airflow.client.airflow_api_client import AirflowApiClient
+from fabric.airflow.client.config import Config
+
+# Initialize Config from environment variable CONFIG_FILE_PATH
+# Set environment variable: $env:CONFIG_FILE_PATH = "c:\src\ApiTest\config.ini"
+config_file = os.getenv('CONFIG_FILE_PATH')
+assert config_file is not None, "CONFIG_FILE_PATH environment variable must be set"
+config = Config.from_file(config_file, 'TEST')
 
 class TestAirflowNativeApiIntegration(unittest.TestCase):
     """Integration test cases for Airflow Native API client operations"""
 
     def setUp(self):
         """Set up test fixtures"""
-        self.native_client = ConfigClient.airflow_native_client()
+        self.native_client = config.airflow_native_client()
 
     def test_native_client_type(self):
         """Test that ConfigClient returns correct native client type"""
-        self.assertIsInstance(self.native_client, AirflowNativeApiClient)
+        self.assertIsInstance(self.native_client, AirflowApiClient)
 
     def test_list_dags(self):
         """Test SPN authentication by listing DAGs - this is the primary test"""

@@ -1,0 +1,29 @@
+{
+  "properties": {
+    "typeProperties": {
+      "airflowProperties": {
+        "environmentVariables": {
+          "ENV_NEW": "env from configfile",
+          "AZURE_CLIENT_ID-UPD": "MyClientID-Upd"
+        },
+        "secrets": [
+          {
+            "secretName": "my-k8s-secret",
+            "secretNamespace": "adf",
+            "secretType": "kubernetes.io/dockerconfigjson",
+            "serverUrl": "www.bing.com",
+            "username": "admin",
+            "password": "<password>"
+          },
+          {
+            "secretName": "my-basic-auth",
+            "secretNamespace": "adf",
+            "secretType": "kubernetes.io/basic-auth",
+            "secretStringData": { "username": "admin", "password": "<password>" }
+          }
+        ],
+        "airflowRequirements": ["flask-bcrypt"]
+      }
+    }
+  }
+}

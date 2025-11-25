@@ -1,6 +1,27 @@
 {
   "version": "0.2.0",
   "configurations": [
+    
+    {
+      "name": "Python: Debug Current File",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "envFile": "${workspaceFolder}/.env",
+      "justMyCode": true
+    },
+    {
+      "name": "Python: Debug example_usage.py",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/sample/example_usage.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "envFile": "${workspaceFolder}/.env",
+      "justMyCode": false
+    },
     {
       "name": "pytest: Debug all",
       "type": "debugpy",

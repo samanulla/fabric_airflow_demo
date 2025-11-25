@@ -1,8 +1,0 @@
-Tenant: daily07112025.onmicrosoft.com
-Admin: AdminUser01@daily07112025.onmicrosoft.com 
-Cert: https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/asset/Microsoft_Azure_KeyVault/Certificate/https://bami-tenant-adminuser.vault.azure.net/certificates/adminuser01-daily07112025/715b3e0feb51454d81d7db0717fb450d
-
-Name: AirflowDemoSpn // ApiTest Secret
-Tenant: 5ad710af-d4e9-4e36-9d03-548e8c6e64e4
-Client id: 97c709cf-d3a0-4cbc-830d-6cdb72dfeea4
-Secret: K1i8Q~YF~NedGBGi~XYhp1Hnjz_KhtvUp65hZaoX

@@ -1,1 +1,1 @@
-- APi to create pool template should accept none for worker scalability and Version??
+- APi to create pool template should accept none for worker scalability
